@@ -3,17 +3,23 @@ Enter no of elements in array5
 Enter elements99 55 18 17 45
 
  SORTED ARRAY = 17 18 45 55 99
-  */
+*/
+
 #include<iostream>
 #include<climits>
 using namespace std;
 int sort(int n,int a[]) {
     for(int i=0;i<n-1;i++) {
+        int x=-1;
+        int min=a[i];
         for(int j=i+1;j<n;j++) {
-            int min=INT_MAX;
             if(a[j]<min) {
                 min=a[j];
+                x=j;
             }
+        }
+        if(x!=-1) {
+            a[x]=a[i];
             a[i]=min;
         }
     }
