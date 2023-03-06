@@ -1,112 +1,159 @@
-#include<iostream>
-using namespace std; 
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
 struct node{
     int data;
-    node *next;
-}*first=NULL,*last=NULL;
-node *p=new node;
-void Add() {
-        int x;
-        cout<<"Enter no to add\n";
-        cin>>x;
-        first=new node;
-        last=new node;
-        if(first==NULL) {
-                first->data=x;
-                first->next=NULL;
-                last=first;
-        }
-        else {
-                p->data=x;
-                p->next=NULL;
-                last->next=p;
-                last=p;
+    struct node* next;
+}*head=NULL,*last=NULL;
+void Add(){
+        cout<<"Enter no to add ";
+        node* p=new node();
+        cin>>p->data;
+        p->next=NULL;
+        if(head==NULL){
+            head=p;
+            last=p;
+        }else{
+            last->next=p;
+            last=p;    
         }
 }
-void Insert() {
-        int x,pos;
-        if(p==NULL) {
-                cout<<"EMPTY\n";
-                return;
-        }
-        cout<<"Enter position and value\n";
-        cin>>pos>>x;
-        node *q=new node;
-        if(pos==1) {
-                q->data=x;
-                q->next=first;
-                first=q;
-        }
-        else {
-                p=first;
-                for(int i=1;p && i<pos;i++) {
-                        p=p->next;
-                }
-                q->data=x;
-                q->next=p->next;
-                p->next=q;
-        }
-}
-void Delete() {
-        int pos;
-        if(p==NULL) {
-                cout<<"EMPTY\n";
-                return;
-        }
-        cout<<"Enter position of the no which you want to delete\n";
+void DeletePos(){                       //not correct, last no can not be deleted
+        int pos,x=1;
+        cout<<"Enter position(1-indexed) ";
         cin>>pos;
-        node *q=new node;
-        if(pos==1) {
-                first=first->next;
-        }
-        else {
-                p=first;
-                for(int i=1;i<pos && p;i++) {
-                        p=p->next;
-                }
-                q=p->next;
-                p->next=q->next;
-        }
-}
-void Display() {
-        p=first;
-        if(p==NULL) {
-                cout<<"EMPTY\n";
+        node* p=head;
+        node* prev=head;
+        if(head==NULL){
+                cout<<"List is already empty \n";
                 return;
         }
-        for(int i=1;p!=NULL;i++) {
-                cout<<p->data<<"\t";
+        if(pos==1){
+                if(last==head){
+                        head=head->next;
+                        last=head;
+                }else {
+                        head=head->next;
+                }
+                return;
+        }
+        while(x<pos){
+            prev=p;
+            p=p->next;
+        }
+        prev->next=p->next;
+        if(p==last){
+                last=prev;
+        }
+}
+void DeleteNo(){                //incorrect when only 1 element
+        int no;
+        cout<<"Enter no to be deleted fron List ";
+        cin>>no;
+        node* prev=head;
+        node* p=head;
+        while(head){
+                if(head->data==no){
+                        head=head->next;
+                }else {
+                        break;
+                }
+        }
+        p=head->next;
+        prev=head;
+        while(p){
+                if(p->data==no){
+                        prev->next=p->next;
+                }else {
+                        prev=p;
+                }
                 p=p->next;
         }
 }
-void RDisplay(node* p) {
-        if(p==NULL) {
-                cout<<"EMPTY\n";
+void Insert(){                  //not at last
+        int pos,no,x=2;
+        cout<<"Enter position and no ";
+        cin>>pos>>no;
+        node* p=head->next;
+        node* prev=head;
+        node* t=new node();
+        t->data=no;
+        if(pos==1){
+                t->next=head;
+                head=t;
                 return;
         }
-
-        RDisplay(p->next);
-        cout<<p->data<<"\n";
+        while(x<pos){
+                prev=p;
+                p=p->next;
+                x++;
+        }
+        prev->next=t;
+        t->next=p;
+}
+void Display(){
+        node* p=head;
+        if(head==NULL){
+                cout<<"List is Empty\n";
+                return;
+        }
+        cout<<"Linked List :- \n";
+        while(p){
+                cout<<p->data<<"  ";
+                p=p->next;
+        }
+        cout<<"\n";
+}
+void ReverseDisplay(node* p){
+        if(head==NULL) {
+                cout<<"EMPTY LIST\n";
+                return;
+        }
+        if(p==NULL){
+                return;
+        }
+        ReverseDisplay(p->next);
+        cout<<p->data<<" ";
+        if(p==head){
+                cout<<endl;
+        }
+}
+void count(){
+        int x=0;
+        node* p=head;
+        while(p){
+                x++;
+                p=p->next;
+        }
+        cout<<"No of elements in the List are "<<x<<"\n";
+}
+void clear(){
+        head=NULL;
+        last=NULL;
 }
 int main() {
-    int ch;
-    while(1) {
-        cout<<"ENTER 1.ADD 2.INSERT 3.DELETE 4.DISPLAY  5.Reverse Display  6.EXIT\n";
+    int ch=0;
+    while(ch<9) {
+        cout<<"ENTER 1.ADD   2.INSERT   3.DELETE NO   4.DELETE NO BY POSITION    5.DISPLAY  6.Reverse Display  7.NO OF ELEMENTS  8.CLEAR LIST   9.EXIT\n";
         cin>>ch;
         switch(ch) {
                 case 1: Add();
                         break;
                 case 2: Insert();
                         break;
-                case 3: Delete();
+                case 3: DeleteNo();
                         break;
-                case 4: Display();
+                case 4: DeletePos();
                         break;
-                case 5: RDisplay(first);
+                case 5: Display();
                         break;
-                case 6: exit(0);
+                case 6: ReverseDisplay(head);
                         break;
-                default:cout<<"Invalid input\n";
+                case 7: count();
+                        break;
+                case 8:clear();
+                        break;
+                default:cout<<"\t\t\t\t\tEXITED\n";
         }
     }
     return 0;
