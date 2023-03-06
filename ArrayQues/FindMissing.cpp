@@ -2,6 +2,8 @@
 #include<vector>
 using namespace std;
 int main(){
+    // Array size=n 
+    // 1 <= a[i] <=n
     vector<int> a={3,1,5,2,5};
     int ans=-1;
     
