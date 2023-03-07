@@ -55,3 +55,4 @@ Week 4 Assignments:
 	Exponential Search
 	Book Allocation Problem
 >>>>>>> 64dd362ac6c16692696cee81d8bfe812bdb76dc3
+
