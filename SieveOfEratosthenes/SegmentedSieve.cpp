@@ -1,4 +1,4 @@
-/*
+/* 2 & 3 do not comme 
 Output :
 201 300
 211 223 227 229 233 239 241 251 257 263 269 271 277 281 283 293 
@@ -52,6 +52,5 @@ int main() {
         }
     }
     cout<<"\n total prime numbers from "<<start<<" to "<<end<<" are "<<count;
-
     return 0;
 }
