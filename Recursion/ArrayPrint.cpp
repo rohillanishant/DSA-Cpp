@@ -6,6 +6,7 @@ void print(int arr[],int n){
     }
     cout<<arr[0]<<" ";
     print(arr+1,n-1);
+    
 }
 int main() {
     int arr[]={4,2,4,54,8};
