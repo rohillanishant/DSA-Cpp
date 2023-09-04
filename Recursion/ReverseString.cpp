@@ -1,14 +1,17 @@
 #include<iostream>
 using namespace std;
-void reverse(string name) {
-    if(name.length()==0) {
+void reverse(string &s,int i,int j) {
+    if(i>=j) {
         return;
     }
-    string rest=name.substr(1);
-    reverse(rest);
-    cout<<name[0];
+    swap(s[i],s[j]);
+    reverse(s,i+1,j-1);
 }
 int main() {
-    reverse("Binod");
+    string s;
+    cout<<"Enter String ";
+    cin>>s;
+    reverse(s,0,s.size()-1);
+    cout<<"After reversing "<<s;
     return 0;
 }
