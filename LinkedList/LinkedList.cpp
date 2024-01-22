@@ -18,7 +18,7 @@ void Add(){
             last=p;    
         }
 }
-void DeletePos(){                       //not correct, last no can not be deleted
+void DeletePos(){                       
         int pos,x=1;
         cout<<"Enter position(1-indexed) ";
         cin>>pos;
@@ -33,28 +33,41 @@ void DeletePos(){                       //not correct, last no can not be delete
                         head=head->next;
                         last=head;
                 }else {
+                        node* q=head;
                         head=head->next;
+                        q->next=NULL;
+                        delete q;
                 }
                 return;
         }
         while(x<pos){
             prev=p;
             p=p->next;
+            x++;
         }
         prev->next=p->next;
         if(p==last){
                 last=prev;
         }
 }
-void DeleteNo(){                //incorrect when only 1 element
+void DeleteNo(){                
         int no;
         cout<<"Enter no to be deleted fron List ";
         cin>>no;
+        
         node* prev=head;
         node* p=head;
+        if(head->next==NULL && head->data==no){
+                delete head;
+                head=NULL;
+                last=head;
+                return;
+        }
         while(head){
                 if(head->data==no){
+                        node* q=head;
                         head=head->next;
+                        delete q;
                 }else {
                         break;
                 }
@@ -70,7 +83,7 @@ void DeleteNo(){                //incorrect when only 1 element
                 p=p->next;
         }
 }
-void Insert(){                  //not at last
+void Insert(){                  
         int pos,no,x=2;
         cout<<"Enter position and no ";
         cin>>pos>>no;
@@ -128,8 +141,9 @@ void count(){
         cout<<"No of elements in the List are "<<x<<"\n";
 }
 void clear(){
+        delete head;
         head=NULL;
-        last=NULL;
+        last=head;
 }
 int main() {
     int ch=0;
