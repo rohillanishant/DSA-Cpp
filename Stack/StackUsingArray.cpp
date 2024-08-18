@@ -55,8 +55,8 @@ class Stack{
 int main() {
     Stack s(10);
     int choice=0;
-    while(choice<6){
-        cout<<"1.Insert   2.Remove   3.Top Element    4.Size    5.Check if stack is empty    6.Exit\n";
+    while(choice<7){
+        cout<<"1.Insert   2.Remove   3.Top Element    4.Size    5.Check if stack is empty    6.Print & clear 7.Exit\n";
         cin>>choice;
         switch(choice){
             case 1: int data;
@@ -72,6 +72,8 @@ int main() {
                     break;
             case 5: if(s.isEmpty()) cout<<"Empty stack\n";
                     else cout<<"Stack is not empty\n";
+                    break;
+            case 6: s.print();
                     break;
             default: cout<<"Exited";
         }

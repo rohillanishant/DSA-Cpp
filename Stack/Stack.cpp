@@ -16,6 +16,10 @@ void remove(stack<int>& s){
     s.pop();
 }
 void print(stack<int> &s){
+    if(s.empty()){
+        cout<<"Stack is empty";
+        return;
+    }
     cout<<"Stack is : ";
     while(!s.empty()){
         cout<<s.top()<<" ";
